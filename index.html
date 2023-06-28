@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 {
+            display: inline-block;
+            margin-right: 2rem;
+            border: 2px solid black;
+            padding: 1rem;
+        }
+        table th , table td{
+            border: 1px solid;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <input type="text" iugh placeholder="Enter Your Name">
+        <input type="number" placeholder="Enter Your Age">
+        <button>Add</button>
+        <button>Print In Table</button>
+        <br>
+    </div>
+    <div class="container">
+       
+    </div>
+    <table style="display: none;">
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+       </table>
+
+    <script>
+        // 28 to 59 lines for print code in document page
+
+        let names = document.querySelectorAll("input")[0]
+        let age = document.querySelectorAll("input")[1]
+        let add = document.querySelectorAll("button")[0]
+        let print = document.querySelectorAll("button")[1]
+
+        add.onclick = () => {
+            if (names.value == "" && age.value == "") {
+                alert('please enter something')
+            }
+            else {
+                let input_name = document.createElement("h2");
+                let input_age = document.createElement("h2");
+                if (names.value == "" || age.value == "") {
+                    if (names.value == "") {
+                        input_name.innerHTML = "Empty";
+                        input_age.innerHTML = age.value
+                    }
+                    else {
+                        input_name.innerHTML = names.value
+                        input_age.innerHTML = "Empty";
+                    }
+                }
+                else {
+                    input_name.innerHTML = names.value
+                    input_age.innerHTML = age.value
+                }
+                document.querySelector(".container").appendChild(input_name)
+                document.querySelector(".container").appendChild(input_age)
+                names.value = ""
+                age.value = ""
+                document.querySelector(".container").appendChild(document.createElement("br"))
+                names.focus()
+            }
+        }
+
+        print.onclick = () => {
+            document.querySelector(".container").style.display="none"
+            document.querySelector("table").style.display="block"
+            let number = 1;
+            let entries = document.querySelectorAll(".container h2")
+            for (let i = 0; i < entries.length; i++) {
+                
+                let serial =document.createElement("td")
+                let name_data = document.createElement("td")
+                let age_data = document.createElement("td")
+                name_data.innerHTML = entries[i].innerHTML;
+                i = i + 1
+                age_data.innerHTML = entries[i].innerHTML;
+                serial.innerHTML= number
+                
+                for(let j=0;j<3;j++){
+                    let table_row = document.createElement("tr")
+                    table_row.appendChild(serial)
+                    table_row.appendChild(name_data)
+                    table_row.appendChild(age_data)
+                    document.querySelector("table").appendChild(table_row)
+                }
+                number = number +1;
+                
+            }
+        }
+    </script>
+</body>
+
+</html>
